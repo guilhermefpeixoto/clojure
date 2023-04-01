@@ -1,4 +1,4 @@
-(ns exercicios.disciplinas
+(ns exercicios.disciplinas_threading_last
   (:require [clojure.string :refer [join]]))
 
 (defn disciplinas
@@ -9,4 +9,7 @@
 
 (defn mostra-disciplinas-restantes
   [disciplinas semestre]
-  (join ", " (map #(.toUpperCase (:nome %)) (filter #(>= (:semestre %) semestre) disciplinas))))
+  (->> disciplinas
+       (filter #(>= (:semestre %) semestre))
+       (map #(.toUpperCase (:nome %)))
+       (join ", ")))
